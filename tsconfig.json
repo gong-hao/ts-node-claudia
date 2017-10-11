@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2016",
+    "pretty": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

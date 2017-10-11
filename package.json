@@ -1,0 +1,28 @@
+{
+  "name": "ts-node-claudia",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "glob": "npm i typescript ts-node nodemon claudia -g",
+    "dev": "nodemon -e js,ts --exec \"ts-node\" src/serve",
+    "build": "copy \"package.json\" \"dist/package.json\" & tsc -p tsconfig.prod.json",
+    "create": "claudia create --source dist --handler lambda.handler --deploy-proxy-api --runtime nodejs6.10 --timeout 30 --region us-east-1 --name testNewApi --set-env-from-json env.json",
+    "update": "claudia update --source dist"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.37",
+    "@types/joi": "^10.4.3",
+    "@types/mongodb": "^2.2.12",
+    "@types/node": "^8.0.32",
+    "nodemon": "^1.12.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "aws-serverless-express": "^3.0.2",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "joi": "^11.1.1",
+    "mongodb": "^2.2.31"
+  }
+}

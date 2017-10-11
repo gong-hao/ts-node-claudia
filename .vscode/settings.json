@@ -1,0 +1,21 @@
+{
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "off",
+  "editor.tabSize": 2,
+  "editor.formatOnType": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "boundary",
+  "editor.insertSpaces": true,
+  "editor.fontFamily": "Consolas, '微軟正黑體'",
+  "editor.fontSize": 16,
+  "editor.wordWrap": "off",
+  "editor.minimap.enabled": false,
+  "editor.renderIndentGuides": false,
+  "window.zoomLevel": 1,
+  "files.exclude": {
+    "node_modules/": true,
+    "dist/": true
+  },
+  "files.insertFinalNewline": true
+}
