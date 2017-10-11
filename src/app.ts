@@ -1,6 +1,5 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
-import * as fs from 'fs';
 
 import { Controller } from './api/base/controller';
 import {
@@ -16,11 +15,6 @@ import {
 
 const router = express.Router();
 const app = express();
-
-if (fs.existsSync('env.json')) {
-  const config = JSON.parse(fs.readFileSync('env.json', 'utf8'));
-  Object.keys(config).forEach(name => process.env[name] = config[name]);
-}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
