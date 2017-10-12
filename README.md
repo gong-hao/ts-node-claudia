@@ -52,6 +52,6 @@ aws_secret_access_key = YOUR_ACCESS_SECRET
 
 2. Run `npm run create` to initialize [`Claudia.js`](https://github.com/claudiajs/claudia). [`Claudia.js`](https://github.com/claudiajs/claudia) will install packages, zip files, upload to [`Lambda`](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html), setup [`API Gateway`](http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html).
 
-3. Run `npm run update` to update api if you have done `npm run create` before. Be careful to keep claudia.json into `dist folder`. Claudia will generate it after creating api, and use it for update api.
+3. Run `npm run update` to update api if you have done `npm run create` before. Be careful to keep claudia.json into `dist folder`. Claudia will generate it after creating api, and use it to update api.
 
    > See more detail in  [Claudia.js documentation](https://github.com/claudiajs/claudia/tree/master/docs)
