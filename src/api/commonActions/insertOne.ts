@@ -1,4 +1,4 @@
-import { GetDb } from '../../conn';
+import { GetDb } from '../base/getDb';
 
 export const InsertOne = async<T>(data: any, collectionName: string) => {
   const db = await GetDb();

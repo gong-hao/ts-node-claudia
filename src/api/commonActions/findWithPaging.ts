@@ -1,4 +1,4 @@
-import { GetDb } from '../../conn';
+import { GetDb } from '../base/getDb';
 import { GetMetadata, GetSortObject } from './share/paging';
 
 export const FindWithPaging = async<T>(
