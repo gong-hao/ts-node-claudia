@@ -1,15 +1,11 @@
 import { ObjectID } from 'mongodb';
 
-import { GetDb } from '../../conn';
+import { ConvertObjectID } from './share/convert';
+import { UpdateOneByQuery } from './updateOneByQuery';
 
-export const UpdateOneById = async<T>(id: string, data: any, collectionName: string) => {
-  const db = await GetDb();
+export const UpdateOneById = async<T>(id: string | ObjectID, data: any, collectionName: string) => {
   const conditions = {
-    _id: new ObjectID(id)
+    _id: ConvertObjectID(id)
   };
-  const update = {
-    $set: data
-  };
-  return db.collection<T>(collectionName)
-    .updateOne(conditions, update);
+  return UpdateOneByQuery(conditions, data, collectionName);
 };

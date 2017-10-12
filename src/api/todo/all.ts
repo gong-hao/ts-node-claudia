@@ -4,7 +4,7 @@ import { DocName } from '../../enum/docName';
 import { ITodo } from '../../interface/todo';
 import { Validator } from '../../joi/share/validator';
 import { QueryTodoSchema } from '../../joi/todo';
-import { FindAll } from '../commonActions/findAll';
+import { FindManyByQuery } from '../commonActions/findManyByQuery';
 
 export const TodoAll = async (req: express.Request) => {
   const query = await Validator<ITodo>(req.query, QueryTodoSchema);
@@ -12,6 +12,6 @@ export const TodoAll = async (req: express.Request) => {
   if (query.Title) {
     conditions.Title = { $regex: query.Title }
   }
-  const docs = await FindAll<ITodo>(conditions, DocName.Todos);
+  const docs = await FindManyByQuery<ITodo>(conditions, DocName.Todos);
   return { statusCode: 200, data: docs };
 };

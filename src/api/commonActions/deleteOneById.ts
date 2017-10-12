@@ -1,12 +1,11 @@
 import { ObjectID } from 'mongodb';
 
-import { GetDb } from '../../conn';
+import { DeleteOneByQuery } from './deleteOneByQuery';
+import { ConvertObjectID } from './share/convert';
 
-export const DeleteOneById = async<T>(id: string, collectionName: string) => {
-  const db = await GetDb();
+export const DeleteOneById = async<T>(id: string | ObjectID, collectionName: string) => {
   const conditions = {
-    _id: new ObjectID(id)
+    _id: ConvertObjectID(id)
   };
-  return db.collection<T>(collectionName)
-    .deleteOne(conditions);
+  return DeleteOneByQuery(conditions, collectionName);
 };

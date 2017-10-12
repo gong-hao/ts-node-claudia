@@ -1,13 +1,11 @@
 import { ObjectID } from 'mongodb';
 
-import { GetDb } from '../../conn';
+import { ConvertObjectIDs } from './share/convert';
+import { UpdateManyByQuery } from './updateManyByQuery';
 
-export const UpdateManyByIds = async<T>(ids: string[], data: any[], collectionName: string) => {
-  const db = await GetDb();
-  const _ids = ids.map(x => new ObjectID(x));
+export const UpdateManyByIds = async<T>(ids: string[] | ObjectID[], data: any[], collectionName: string) => {
   const conditions = {
-    _id: { $in: _ids }
+    _id: { $in: ConvertObjectIDs(ids) }
   };
-  return db.collection(collectionName)
-    .updateMany(conditions, { $set: data });
+  return UpdateManyByQuery(conditions, data, collectionName);
 };

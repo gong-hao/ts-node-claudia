@@ -1,12 +1,11 @@
-import { ObjectId } from 'mongodb';
+import { ObjectID } from 'mongodb';
 
-import { GetDb } from '../../conn';
+import { FindOneByQuery } from './findOneByQuery';
+import { ConvertObjectID } from './share/convert';
 
-export const FindOneById = async<T>(id: string, collectionName: string) => {
-  const db = await GetDb();
+export const FindOneById = async<T>(id: string | ObjectID, collectionName: string) => {
   const conditions = {
-    _id: new ObjectId(id)
+    _id: ConvertObjectID(id)
   };
-  return db.collection<T>(collectionName)
-    .findOne(conditions);
+  return FindOneByQuery(conditions, collectionName);
 };

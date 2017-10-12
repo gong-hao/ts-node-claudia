@@ -1,15 +1,11 @@
 import { ObjectID } from 'mongodb';
 
-import { GetDb } from '../../conn';
+import { DeleteManyByQuery } from './deleteManyByQuery';
+import { ConvertObjectIDs } from './share/convert';
 
-export const DeleteManyByIds = async<T>(ids: string[], collectionName: string) => {
-  const db = await GetDb();
-  return new Promise((resolve, reject) => {
-    const _ids = ids.map(x => new ObjectID(x));
-    const conditions = {
-      _id: { $in: _ids }
-    };
-    return db.collection<T>(collectionName)
-      .deleteMany(conditions);
-  });
+export const DeleteManyByIds = async<T>(ids: string[] | ObjectID[], collectionName: string) => {
+  const conditions = {
+    _id: { $in: ConvertObjectIDs(ids) }
+  };
+  return DeleteManyByQuery(conditions, collectionName);
 };

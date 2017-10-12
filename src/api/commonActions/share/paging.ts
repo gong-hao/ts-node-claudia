@@ -1,4 +1,36 @@
-import { GetPageUrl } from './getPageUrl';
+export const GetSortObject = (sort, defaultObj) => {
+  if (!sort) {
+    return defaultObj;
+  }
+  const obj = {};
+  sort.split(',').forEach(x => {
+    const isDesc = x.indexOf('-') === 0;
+    const name = x.replace(/[^0-9a-zA-Z]/, '');
+    if (isDesc) {
+      obj[name] = -1;
+    } else {
+      obj[name] = 1;
+    }
+  });
+  return obj;
+};
+
+export const GetPageUrl = (path, currentPage, newPage) => {
+  if (currentPage === newPage) {
+    return null;
+  }
+  return path
+    .split(/[?&]/)
+    .map((x, i) => {
+      const prefix = i === 0 ? '' : '&';
+      const suffix = i === 0 ? '?' : '';
+      if (x === 'Page=' + currentPage) {
+        return prefix + 'Page=' + newPage + suffix;
+      }
+      return prefix + x + suffix;
+    })
+    .join('');
+};
 
 export const GetMetadata = (count, paging, url) => {
   const first = 1;
