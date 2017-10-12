@@ -5,8 +5,8 @@ import { IParams } from '../../interface/params';
 import { IResult } from '../../interface/result';
 import { ITodo } from '../../interface/todo';
 import { IdSchema } from '../../joi/id';
-import { Validator } from '../../joi/share/validator';
 import { ModifyTodoSchema } from '../../joi/todo';
+import { Validator } from '../../joi/validator';
 import { UpdateOneById } from '../commonActions/updateOneById';
 
 export const TodoModify = async (req: express.Request): Promise<IResult<any>> => {

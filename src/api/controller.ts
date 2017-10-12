@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-import { ErrorType } from '../../enum/errorType';
+import { ErrorType } from '../enum/errorType';
 
 export const Controller = api => {
   return (req: express.Request, res: express.Response, next: express.NextFunction) => {

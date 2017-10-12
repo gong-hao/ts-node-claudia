@@ -4,8 +4,8 @@ import { DocName } from '../../enum/docName';
 import { IResult } from '../../interface/result';
 import { ITodo } from '../../interface/todo';
 import { PagingSchema } from '../../joi/paging';
-import { Validator } from '../../joi/share/validator';
 import { QueryTodoSchema } from '../../joi/todo';
+import { Validator } from '../../joi/validator';
 import { FindWithPaging } from '../commonActions/findWithPaging';
 
 export const TodoList = async (req: express.Request): Promise<IResult<ITodo[]>> => {

@@ -5,7 +5,7 @@ import { IParams } from '../../interface/params';
 import { IResult } from '../../interface/result';
 import { ITodo } from '../../interface/todo';
 import { IdSchema } from '../../joi/id';
-import { Validator } from '../../joi/share/validator';
+import { Validator } from '../../joi/validator';
 import { FindOneById } from '../commonActions/findOneById';
 
 export const TodoDetail = async (req: express.Request): Promise<IResult<ITodo>> => {
