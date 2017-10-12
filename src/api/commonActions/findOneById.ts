@@ -7,5 +7,5 @@ export const FindOneById = async<T>(id: string | ObjectID, collectionName: strin
   const conditions = {
     _id: ConvertObjectID(id)
   };
-  return FindOneByQuery(conditions, collectionName);
+  return FindOneByQuery<T>(conditions, collectionName);
 };

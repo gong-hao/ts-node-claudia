@@ -7,5 +7,5 @@ export const UpdateManyByIds = async<T>(ids: string[] | ObjectID[], data: any[],
   const conditions = {
     _id: { $in: ConvertObjectIDs(ids) }
   };
-  return UpdateManyByQuery(conditions, data, collectionName);
+  return UpdateManyByQuery<T>(conditions, data, collectionName);
 };

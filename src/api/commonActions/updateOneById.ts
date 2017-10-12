@@ -7,5 +7,5 @@ export const UpdateOneById = async<T>(id: string | ObjectID, data: any, collecti
   const conditions = {
     _id: ConvertObjectID(id)
   };
-  return UpdateOneByQuery(conditions, data, collectionName);
+  return UpdateOneByQuery<T>(conditions, data, collectionName);
 };

@@ -7,5 +7,5 @@ export const FindManyByIds = async<T>(ids: string[] | ObjectID[], collectionName
   const conditions = {
     _id: { $in: ConvertObjectIDs(ids) }
   };
-  return FindManyByQuery(conditions, collectionName);
+  return FindManyByQuery<T>(conditions, collectionName);
 };

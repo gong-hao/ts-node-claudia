@@ -7,5 +7,5 @@ export const DeleteOneById = async<T>(id: string | ObjectID, collectionName: str
   const conditions = {
     _id: ConvertObjectID(id)
   };
-  return DeleteOneByQuery(conditions, collectionName);
+  return DeleteOneByQuery<T>(conditions, collectionName);
 };

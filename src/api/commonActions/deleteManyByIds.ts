@@ -7,5 +7,5 @@ export const DeleteManyByIds = async<T>(ids: string[] | ObjectID[], collectionNa
   const conditions = {
     _id: { $in: ConvertObjectIDs(ids) }
   };
-  return DeleteManyByQuery(conditions, collectionName);
+  return DeleteManyByQuery<T>(conditions, collectionName);
 };
