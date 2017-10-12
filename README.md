@@ -12,7 +12,7 @@ Run `npm run glob` to install [`typescript`](https://www.typescriptlang.org/), [
 
 ## Environment variables
 
-`env.json` is using for setting environment variables (.gitignore ignores this file to protact you ).
+`env.json` is used for setting environment variables (.gitignore ignores this file to protect you from leaking top secrets).
 
 By default, the project uses conn variable to link [`MongoDB`](https://www.mongodb.com/).
 
@@ -32,9 +32,9 @@ Run `npm run dev` for a dev server. It uses [`nodemon`](https://github.com/remy/
 
 ## AWS settings
 
-Your `IAM user` will need to access at least [`Lambda`](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html), [`API Gateway`](http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html), and [`IAM`](http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in order to run [`Claudia.js`](https://github.com/claudiajs/claudia).
+Your `IAM user` must can access at least [`Lambda`](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html), [`API Gateway`](http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html), and [`IAM`](http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in order to run [`Claudia.js`](https://github.com/claudiajs/claudia).
 
-Add the keys to your `.aws/credentials` file
+Add the keys to your `.aws/credentials` file.
 
 ```
 [claudia]
