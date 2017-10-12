@@ -7,7 +7,7 @@
     "dev": "nodemon -e js,ts --exec \"ts-node\" src/serve",
     "build": "tsc -p tsconfig.prod.json & copy \"package.json\" \"dist/package.json\"",
     "create": "claudia create --source dist --handler lambda.handler --deploy-proxy-api --runtime nodejs6.10 --timeout 30 --region us-east-1 --set-env-from-json env.json",
-    "update": "claudia update --source dist"
+    "update": "claudia update --source dist --set-env-from-json env.json"
   },
   "devDependencies": {
     "@types/express": "^4.0.37",
