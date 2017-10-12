@@ -16,13 +16,15 @@ Run `npm run glob` to install [`typescript`](https://www.typescriptlang.org/), [
 
 By default, the project uses conn variable to link [`MongoDB`](https://www.mongodb.com/).
 
-`Development server` will load it in `serve.ts`, and [`Claudia.js`](https://github.com/claudiajs/claudia) also use it to set environment variables on [`Lambda`](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html).
-
 ```
 {
   "conn": "mongodb://{username}:{password}@ds123456.mlab.com:45678/{dbname}"
 }
 ```
+
+You can use [`mLib`](https://mlab.com/) for testing.
+
+`Development server` loads `env.json` in `serve.ts` when you run `npm run dev`, and [`Claudia.js`](https://github.com/claudiajs/claudia) also uses `env.json` to set environment variables on [`Lambda`](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html).
 
 ## Development server
 
@@ -33,11 +35,14 @@ Run `npm run dev` for a dev server. It uses [`nodemon`](https://github.com/remy/
 Your `IAM user` will need to access at least [`Lambda`](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html), [`API Gateway`](http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html), and [`IAM`](http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in order to run [`Claudia.js`](https://github.com/claudiajs/claudia).
 
 Add the keys to your `.aws/credentials` file
+
 ```
 [claudia]
 aws_access_key_id = YOUR_ACCESS_KEY
 aws_secret_access_key = YOUR_ACCESS_SECRET
 ```
+
+> The AWS credentials file – located at ~/.aws/credentials on Linux, macOS, or Unix, or at C:\Users\USERNAME \.aws\credentials on Windows. This file can contain multiple named profiles in addition to a default profile.
 
 > See more detail in [INSTALLING AND CONFIGURING CLAUDIA.JS](https://claudiajs.com/tutorials/installing.html#configuring-access-credentials)
 
