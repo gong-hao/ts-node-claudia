@@ -1,4 +1,4 @@
-import { GetDb } from '../base/getDb';
+import { GetDb } from '../share/getDb';
 
 export const UpdateManyByQuery = async<T>(conditions: any, data: any[], collectionName: string) => {
   const db = await GetDb();

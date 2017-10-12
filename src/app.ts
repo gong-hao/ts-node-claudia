@@ -1,7 +1,7 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 
-import { Controller } from './api/base/controller';
+import { Controller } from './api/share/controller';
 import {
   TodoAll,
   TodoCreate,
