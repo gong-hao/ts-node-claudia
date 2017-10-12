@@ -1,12 +1,13 @@
 import * as express from 'express';
 
 import { DocName } from '../../enum/docName';
+import { IResult } from '../../interface/result';
 import { ITodo } from '../../interface/todo';
 import { Validator } from '../../joi/share/validator';
 import { QueryTodoSchema } from '../../joi/todo';
 import { FindManyByQuery } from '../commonActions/findManyByQuery';
 
-export const TodoAll = async (req: express.Request) => {
+export const TodoAll = async (req: express.Request): Promise<IResult<ITodo[]>> => {
   const query = await Validator<ITodo>(req.query, QueryTodoSchema);
   const conditions: any = {};
   if (query.Title) {

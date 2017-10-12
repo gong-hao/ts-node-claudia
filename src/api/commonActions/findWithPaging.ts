@@ -12,10 +12,10 @@ export const FindWithPaging = async<T>(
   const dbQuery = db.collection<T>(collectionName).find(conditions);
   const count = await dbQuery.count();
   const metadata = GetMetadata(count, paging, url);
-  const docs = await dbQuery
+  const data = await dbQuery
     .sort(paging.Sort)
     .skip(paging.Limit * (paging.Page - 1))
     .limit(paging.Limit)
     .toArray();
-  return { docs, metadata };
+  return { data, metadata };
 };
