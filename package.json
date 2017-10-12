@@ -6,7 +6,7 @@
     "glob": "npm i typescript ts-node nodemon claudia -g",
     "dev": "nodemon -e js,ts --exec \"ts-node\" src/serve",
     "build": "tsc -p tsconfig.prod.json & copy \"package.json\" \"dist/package.json\"",
-    "create": "claudia create --source dist --handler lambda.handler --deploy-proxy-api --runtime nodejs6.10 --timeout 30 --region us-east-1 --name testNewApi --set-env-from-json env.json",
+    "create": "claudia create --source dist --handler lambda.handler --deploy-proxy-api --runtime nodejs6.10 --timeout 30 --region us-east-1 --set-env-from-json env.json",
     "update": "claudia update --source dist"
   },
   "devDependencies": {
