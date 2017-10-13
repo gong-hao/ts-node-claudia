@@ -97,6 +97,7 @@ describe('_getMetadata', () => {
         last: "/todos?Page=7&Limit=2&Sort=Title,-CreateOn"
       }
     };
+    actual.should.be.deepEqual(expected);
   });
 });
 

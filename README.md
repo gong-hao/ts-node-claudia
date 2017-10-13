@@ -55,3 +55,7 @@ aws_secret_access_key = YOUR_ACCESS_SECRET
 3. Run `npm run update` to update api if you have done `npm run create` before. Be careful to keep claudia.json into `dist folder`. Claudia will generate it after creating api, and use it to update api.
 
    > See more detail in  [Claudia.js documentation](https://github.com/claudiajs/claudia/tree/master/docs)
+
+## Testing
+
+1. Run `npm run test` to run unit tests. All files with *.spec.ts will be tested.
