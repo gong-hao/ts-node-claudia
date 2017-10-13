@@ -1,6 +1,7 @@
 import * as express from 'express';
 
 import { DocName } from '../../enum/docName';
+import { IPaging } from '../../interface/paging';
 import { IResult } from '../../interface/result';
 import { ITodo } from '../../interface/todo';
 import { PagingSchema } from '../../joi/paging';
@@ -10,7 +11,7 @@ import { FindWithPaging } from '../commonActions/findWithPaging';
 
 export const TodoList = async (req: express.Request): Promise<IResult<ITodo[]>> => {
   const query = await Validator<ITodo>(req.query, QueryTodoSchema);
-  const paging = await Validator<ITodo>(req.query, PagingSchema);
+  const paging = await Validator<IPaging>(req.query, PagingSchema);
   const conditions: any = {};
   if (query.Title) {
     conditions.Title = { $regex: query.Title }
