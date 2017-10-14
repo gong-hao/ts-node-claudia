@@ -21,14 +21,12 @@
     "nodemon": "^1.12.1",
     "nyc": "^11.2.1",
     "should": "^13.1.2",
-    "source-map-support": "^0.5.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.3"
   },
   "dependencies": {
     "aws-serverless-express": "^3.0.2",
     "body-parser": "^1.18.2",
-    "escape-string-regexp": "^1.0.5",
     "express": "^4.16.1",
     "joi": "^11.1.1",
     "mongodb": "^2.2.31"
@@ -49,7 +47,6 @@
       "text-summary",
       "html"
     ],
-    "sourceMap": true,
     "instrument": true
   }
 }
