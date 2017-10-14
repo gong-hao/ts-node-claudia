@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "glob": "npm i typescript ts-node nodemon claudia -g",
+    "glob": "npm i typescript ts-node nodemon claudia mocha nyc -g",
     "dev": "nodemon -e js,ts --exec \"ts-node\" src/serve",
     "build": "tsc -p tsconfig.prod.json & copy \"package.json\" \"dist/package.json\"",
     "create": "claudia create --source dist --handler lambda.handler --deploy-proxy-api --runtime nodejs6.10 --timeout 30 --region us-east-1 --set-env-from-json env.json",
     "update": "claudia update --source dist --set-env-from-json env.json",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts --reporter min"
+    "test": "nyc mocha src/**/*.spec.ts"
   },
   "devDependencies": {
     "@types/express": "^4.0.37",
@@ -21,14 +21,35 @@
     "nodemon": "^1.12.1",
     "nyc": "^11.2.1",
     "should": "^13.1.2",
+    "source-map-support": "^0.5.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.3"
   },
   "dependencies": {
     "aws-serverless-express": "^3.0.2",
     "body-parser": "^1.18.2",
+    "escape-string-regexp": "^1.0.5",
     "express": "^4.16.1",
     "joi": "^11.1.1",
     "mongodb": "^2.2.31"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
   }
 }

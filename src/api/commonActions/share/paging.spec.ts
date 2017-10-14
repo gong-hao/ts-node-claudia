@@ -1,5 +1,6 @@
 import 'mocha';
-import 'should';
+
+import * as should from 'should';
 
 import { _getMetadata, _getPageUrl, _getSortObject, GetPaging } from './paging';
 
@@ -96,6 +97,118 @@ describe('_getMetadata', () => {
         next: "/todos?Page=2&Limit=2&Sort=Title,-CreateOn",
         last: "/todos?Page=7&Limit=2&Sort=Title,-CreateOn"
       }
+    };
+    actual.should.be.deepEqual(expected);
+  });
+  it('should return correct metadata when having divisible pages', () => {
+    const count = 10;
+    const paging = {
+      Page: 1,
+      Limit: 2,
+      Sort: 'Title,-CreateOn'
+    };
+    const sortObj = {
+      Title: 1,
+      CreateOn: -1
+    };
+    const path = '/todos?Page=1&Limit=2&Sort=Title,-CreateOn'
+    const actual = _getMetadata(count, paging, path, sortObj);
+    const expected = {
+      count: 10,
+      page: 1,
+      limit: 2,
+      sort: {
+        Title: 1,
+        CreateOn: -1
+      },
+      links: {
+        first: null,
+        previous: null,
+        current: '/todos?Page=1&Limit=2&Sort=Title,-CreateOn',
+        next: "/todos?Page=2&Limit=2&Sort=Title,-CreateOn",
+        last: "/todos?Page=5&Limit=2&Sort=Title,-CreateOn"
+      }
+    };
+    actual.should.be.deepEqual(expected);
+  });
+  it('should return correct metadata when last page', () => {
+    const count = 13;
+    const paging = {
+      Page: 7,
+      Limit: 2,
+      Sort: 'Title,-CreateOn'
+    };
+    const sortObj = {
+      Title: 1,
+      CreateOn: -1
+    };
+    const path = '/todos?Page=7&Limit=2&Sort=Title,-CreateOn'
+    const actual = _getMetadata(count, paging, path, sortObj);
+    const expected = {
+      count: 13,
+      page: 7,
+      limit: 2,
+      sort: {
+        Title: 1,
+        CreateOn: -1
+      },
+      links: {
+        first: "/todos?Page=1&Limit=2&Sort=Title,-CreateOn",
+        previous: "/todos?Page=6&Limit=2&Sort=Title,-CreateOn",
+        current: "/todos?Page=7&Limit=2&Sort=Title,-CreateOn",
+        next: null,
+        last: null
+      }
+    };
+    actual.should.be.deepEqual(expected);
+  });
+  it('should return page not exist metadata when page less than 1', () => {
+    const count = 13;
+    const paging = {
+      Page: 0,
+      Limit: 2,
+      Sort: 'Title,-CreateOn'
+    };
+    const sortObj = {
+      Title: 1,
+      CreateOn: -1
+    };
+    const path = '/todos?Page=0&Limit=2&Sort=Title,-CreateOn'
+    const actual = _getMetadata(count, paging, path, sortObj);
+    const expected = {
+      count: 13,
+      page: -1,
+      limit: 2,
+      sort: {
+        Title: 1,
+        CreateOn: -1
+      },
+      links: null
+    };
+    actual.should.be.deepEqual(expected);
+  });
+  it('should return page not exist metadata when page greater than last', () => {
+    const count = 13;
+    const paging = {
+      Page: 99,
+      Limit: 2,
+      Sort: 'Title,-CreateOn'
+    };
+    const sortObj = {
+      Title: 1,
+      CreateOn: -1
+    };
+    const path = '/todos?Page=99&Limit=2&Sort=Title,-CreateOn'
+    const actual = _getMetadata(count, paging, path, sortObj);
+    const expected = {
+      count: 13,
+      page: -1,
+      limit: 2,
+      sort: {
+        Title: 1,
+        CreateOn: -1
+      },
+      links: null
     };
     actual.should.be.deepEqual(expected);
   });
