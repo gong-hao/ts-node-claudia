@@ -2,7 +2,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2016",
-    "pretty": true
+    "outDir": "dist",
+    "removeComments": true,
+    "sourceMap": false
   },
   "exclude": [
     "node_modules",
