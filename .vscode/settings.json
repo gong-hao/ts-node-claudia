@@ -15,7 +15,9 @@
   "window.zoomLevel": 1,
   "files.exclude": {
     "node_modules/": true,
-    "dist/": true
+    "dist/": true,
+    ".nyc_output": true,
+    "coverage/": true
   },
   "files.insertFinalNewline": true
 }

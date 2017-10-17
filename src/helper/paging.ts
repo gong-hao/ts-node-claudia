@@ -1,4 +1,4 @@
-import { IPaging } from '../../../interface/paging';
+import { IPaging } from '../interface/paging';
 
 export const _getSortObject = (sort: string, defaultObj: Object) => {
   if (!sort) {

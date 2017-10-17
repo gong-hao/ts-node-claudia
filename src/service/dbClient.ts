@@ -2,7 +2,7 @@ import { Db, MongoClient } from 'mongodb';
 
 let _db = null;
 
-export const GetDb = () => new Promise<Db>((resolve, reject) => {
+const getDb = () => new Promise<Db>((resolve, reject) => {
   if (_db) {
     return resolve(_db);
   }
@@ -14,3 +14,7 @@ export const GetDb = () => new Promise<Db>((resolve, reject) => {
     resolve(_db);
   });
 });
+
+export const DbClient = {
+  getDb
+};

@@ -7,11 +7,11 @@ export const QueryTodoSchema = joi.object().keys({
 export const CreateTodoSchema = joi.object().keys({
   Title: joi.string().trim().required(),
   Done: joi.boolean().default(false),
-  CreateOn: joi.date().default(() => new Date(), 'now').forbidden(),
+  CreateOn: joi.date().default(Date, 'now').forbidden(),
   DoneOn: joi.date()
     .when('Done', {
       is: true,
-      then: joi.date().default(() => new Date(), 'now').forbidden(),
+      then: joi.date().default(Date, 'now').forbidden(),
       otherwise: joi.date().default(null).forbidden()
     })
 });

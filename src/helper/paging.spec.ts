@@ -1,6 +1,6 @@
 import 'mocha';
 
-import * as should from 'should';
+import { expect } from 'chai';
 
 import { _getMetadata, _getPageUrl, _getSortObject, GetPaging } from './paging';
 
@@ -14,7 +14,7 @@ describe('_getSortObject', () => {
       CreateOn: -1,
       Title: 1
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
   it('should return an sort object when using "Views, -CreateOn, +Title"', () => {
     const sort = 'Views, -CreateOn, +Title';
@@ -25,7 +25,7 @@ describe('_getSortObject', () => {
       CreateOn: -1,
       Title: 1
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
   it('should return an sort object when using ", Views, -CreateOn, +Title"', () => {
     const sort = ', Views, -CreateOn, +Title';
@@ -36,7 +36,7 @@ describe('_getSortObject', () => {
       CreateOn: -1,
       Title: 1
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
   it('should return an default sort object when not passing sort param', () => {
     const sort = null;
@@ -45,26 +45,26 @@ describe('_getSortObject', () => {
     const expected = {
       CreateOn: -1
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
 });
 
 describe('_getPageUrl', () => {
   it('should change to "Page=1" when using params path, 3, 1', () => {
     const actual = _getPageUrl('/todos?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 1);
-    actual.should.equal('/todos?Page=1&Limit=2&Sort=Title,-CreateOn');
+    expect(actual).equal('/todos?Page=1&Limit=2&Sort=Title,-CreateOn');
   });
   it('should change to "Page=1" when using params path, 3, 2', () => {
     const actual = _getPageUrl('/todos?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 2);
-    actual.should.equal('/todos?Page=2&Limit=2&Sort=Title,-CreateOn');
+    expect(actual).equal('/todos?Page=2&Limit=2&Sort=Title,-CreateOn');
   });
   it('should change to null when using params path, 3, 3', () => {
     const actual = _getPageUrl('/todos?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 3);
-    should(actual).be.null();
+    expect(actual).is.null;
   });
   it('should skip extra ? or &', () => {
     const actual = _getPageUrl('/todos???Page=3&&&Limit=2&Sort=Title,-CreateOn', 3, 2);
-    actual.should.equal('/todos?Page=2&Limit=2&Sort=Title,-CreateOn');
+    expect(actual).equal('/todos?Page=2&Limit=2&Sort=Title,-CreateOn');
   });
 });
 
@@ -98,7 +98,7 @@ describe('_getMetadata', () => {
         last: "/todos?Page=7&Limit=2&Sort=Title,-CreateOn"
       }
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
   it('should return correct metadata when having divisible pages', () => {
     const count = 10;
@@ -129,7 +129,7 @@ describe('_getMetadata', () => {
         last: "/todos?Page=5&Limit=2&Sort=Title,-CreateOn"
       }
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
   it('should return correct metadata when last page', () => {
     const count = 13;
@@ -160,7 +160,7 @@ describe('_getMetadata', () => {
         last: null
       }
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
   it('should return page not exist metadata when page less than 1', () => {
     const count = 13;
@@ -185,7 +185,7 @@ describe('_getMetadata', () => {
       },
       links: null
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
   it('should return page not exist metadata when page greater than last', () => {
     const count = 13;
@@ -210,7 +210,7 @@ describe('_getMetadata', () => {
       },
       links: null
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
 });
 
@@ -243,7 +243,7 @@ describe('GetPaging', () => {
         last: "/todos?Page=7&Limit=2&Sort=Title,-CreateOn"
       }
     };
-    actual.should.be.deepEqual(expected);
+    expect(actual).is.deep.equal(expected);
   });
 });
 

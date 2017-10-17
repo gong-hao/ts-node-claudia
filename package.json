@@ -11,16 +11,20 @@
     "test": "nyc mocha src/**/*.spec.ts"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.4",
     "@types/express": "^4.0.37",
     "@types/joi": "^10.4.3",
     "@types/mocha": "^2.2.43",
     "@types/mongodb": "^2.2.12",
     "@types/node": "^8.0.32",
-    "@types/should": "^11.2.0",
+    "@types/sinon": "^2.3.6",
+    "@types/supertest": "^2.0.3",
+    "chai": "^4.1.2",
     "mocha": "^4.0.1",
     "nodemon": "^1.12.1",
     "nyc": "^11.2.1",
-    "should": "^13.1.2",
+    "sinon": "^4.0.1",
+    "supertest": "^3.0.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.3"
   },

@@ -2,16 +2,7 @@ import * as bodyParser from 'body-parser';
 import * as express from 'express';
 
 import { Controller } from './api/controller';
-import {
-  TodoAll,
-  TodoCreate,
-  TodoDelete,
-  TodoDetail,
-  TodoList,
-  TodoModify,
-  TodoMultiRemove,
-  TodoToggle,
-} from './api/todo/index';
+import { Todo } from './api/todo';
 
 const router = express.Router();
 const app = express();
@@ -22,14 +13,14 @@ app.use(bodyParser.urlencoded({
 }));
 
 router
-  .get('/all-todos', Controller(TodoAll))
-  .get('/todos', Controller(TodoList))
-  .get('/todos/:ID', Controller(TodoDetail))
-  .post('/todos', Controller(TodoCreate))
-  .put('/todos/:ID', Controller(TodoModify))
-  .put('/todos/toggle/:ID', Controller(TodoToggle))
-  .delete('/todos/:ID', Controller(TodoDelete))
-  .post('/todos/multiRemove', Controller(TodoMultiRemove))
+  .get('/all-todos', Controller(Todo.all))
+  .get('/todos', Controller(Todo.list))
+  .get('/todos/:ID', Controller(Todo.detail))
+  .post('/todos', Controller(Todo.create))
+  .put('/todos/:ID', Controller(Todo.modify))
+  .put('/todos/toggle/:ID', Controller(Todo.toggle))
+  .delete('/todos/:ID', Controller(Todo.remove))
+  .post('/todos/multiRemove', Controller(Todo.multiRemove))
 
   .get('*', (req, res) => res.status(404).send({ statusCode: 404, message: 'not found' }))
   .post('*', (req, res) => res.status(404).send({ statusCode: 404, message: 'not found' }))
