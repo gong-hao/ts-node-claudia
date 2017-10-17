@@ -1,7 +1,7 @@
 import { ObjectID } from 'mongodb';
 
-import { ConvertObjectID, ConvertObjectIDs } from '../helper/convertObjectID';
-import { GetPaging } from '../helper/paging';
+import { convertObjectID, convertObjectIDs } from '../helper/convertObjectID';
+import { getPaging } from '../helper/paging';
 import { IPaging } from '../interface/controller';
 import { DbClient } from './dbClient';
 
@@ -17,7 +17,7 @@ const insertMany = async<T>(data: any[], collectionName: string) => {
 
 export const updateOneById = async<T>(id: string | ObjectID, data: any, collectionName: string) => {
   const conditions = {
-    _id: ConvertObjectID(id)
+    _id: convertObjectID(id)
   };
   return updateOneByQuery<T>(conditions, data, collectionName);
 };
@@ -32,7 +32,7 @@ export const updateOneByQuery = async<T>(conditions: any, data: any, collectionN
 
 const updateManyByIds = async<T>(ids: string[] | ObjectID[], data: any[], collectionName: string) => {
   const conditions = {
-    _id: { $in: ConvertObjectIDs(ids) }
+    _id: { $in: convertObjectIDs(ids) }
   };
   return updateManyByQuery<T>(conditions, data, collectionName);
 };
@@ -44,7 +44,7 @@ const updateManyByQuery = async<T>(conditions: any, data: any[], collectionName:
 
 const deleteOneById = async<T>(id: string | ObjectID, collectionName: string) => {
   const conditions = {
-    _id: ConvertObjectID(id)
+    _id: convertObjectID(id)
   };
   return deleteOneByQuery<T>(conditions, collectionName);
 };
@@ -56,7 +56,7 @@ const deleteOneByQuery = async<T>(conditions: any, collectionName: string) => {
 
 const deleteManyByIds = async<T>(ids: string[] | ObjectID[], collectionName: string) => {
   const conditions = {
-    _id: { $in: ConvertObjectIDs(ids) }
+    _id: { $in: convertObjectIDs(ids) }
   };
   return deleteManyByQuery<T>(conditions, collectionName);
 };
@@ -68,7 +68,7 @@ const deleteManyByQuery = async<T>(conditions: any, collectionName: string) => {
 
 const findOneById = async<T>(id: string | ObjectID, collectionName: string) => {
   const conditions = {
-    _id: ConvertObjectID(id)
+    _id: convertObjectID(id)
   };
   return findOneByQuery<T>(conditions, collectionName);
 };
@@ -80,7 +80,7 @@ const findOneByQuery = async<T>(conditions: any, collectionName: string) => {
 
 export const findManyByIds = async<T>(ids: string[] | ObjectID[], collectionName: string) => {
   const conditions = {
-    _id: { $in: ConvertObjectIDs(ids) }
+    _id: { $in: convertObjectIDs(ids) }
   };
   return findManyByQuery<T>(conditions, collectionName);
 };
@@ -99,7 +99,7 @@ const findWithPaging = async<T>(
   const db = await DbClient.getDb();
   const dbQuery = db.collection<T>(collectionName).find(conditions);
   const count = await dbQuery.count();
-  const metadata = GetPaging(count, paging, url, defaultSortObj);
+  const metadata = getPaging(count, paging, url, defaultSortObj);
   const data = await dbQuery
     .sort(metadata.sort)
     .skip(paging.Limit * (paging.Page - 1))

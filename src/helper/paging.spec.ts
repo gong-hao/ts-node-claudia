@@ -2,7 +2,7 @@ import 'mocha';
 
 import { expect } from 'chai';
 
-import { _getMetadata, _getPageUrl, _getSortObject, GetPaging } from './paging';
+import { _getMetadata, _getPageUrl, _getSortObject, getPaging } from './paging';
 
 describe('_getSortObject', () => {
   it('should return an sort object when using "Views,-CreateOn,+Title"', () => {
@@ -226,7 +226,7 @@ describe('GetPaging', () => {
       CreateOn: -1
     };
     const path = '/todos?Page=1&Limit=2&Sort=Title,-CreateOn'
-    const actual = GetPaging(count, paging, path, defaultSortObj);
+    const actual = getPaging(count, paging, path, defaultSortObj);
     const expected = {
       count: 13,
       page: 1,

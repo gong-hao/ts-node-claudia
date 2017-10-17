@@ -68,7 +68,7 @@ export const _getMetadata = (count: number, paging: IPaging, url: string, sortOb
   return metadata;
 };
 
-export const GetPaging = (count: number, paging: IPaging, url: string, defaultSortObj: Object) => {
+export const getPaging = (count: number, paging: IPaging, url: string, defaultSortObj: Object) => {
   const sort = _getSortObject(paging.Sort, defaultSortObj);
   const metadata = _getMetadata(count, paging, url, sort);
   return metadata;

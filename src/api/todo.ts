@@ -1,7 +1,7 @@
 import * as express from 'express';
 
 import { DocName } from '../enum/docName';
-import { EscapeStringRegex } from '../helper/escapeStringRegex';
+import { escapeStringRegex } from '../helper/escapeStringRegex';
 import { IIdParams, IPaging, IResult } from '../interface/controller';
 import { ITodo } from '../interface/todo';
 import { IdSchema, PagingSchema, Validator } from '../joi/controller';
@@ -12,7 +12,7 @@ export const all = async (req: express.Request): Promise<IResult<ITodo[]>> => {
   const query = await Validator.validate<ITodo>(req.query, QueryTodoSchema);
   const conditions: any = {};
   if (query.Title) {
-    conditions.Title = { $regex: EscapeStringRegex(query.Title) }
+    conditions.Title = { $regex: escapeStringRegex(query.Title) }
   }
   const docs = await CommonQuery.findManyByQuery<ITodo>(conditions, DocName.Todos);
   return { statusCode: 200, data: docs };
@@ -23,7 +23,7 @@ export const list = async (req: express.Request): Promise<IResult<ITodo[]>> => {
   const paging = await Validator.validate<IPaging>(req.query, PagingSchema);
   const conditions: any = {};
   if (query.Title) {
-    conditions.Title = { $regex: EscapeStringRegex(query.Title) }
+    conditions.Title = { $regex: escapeStringRegex(query.Title) }
   }
   const result = await CommonQuery.findWithPaging<ITodo>(conditions, DocName.Todos, req.url, paging);
   return { statusCode: 200, ...result };
