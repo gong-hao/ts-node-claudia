@@ -2,16 +2,10 @@ import * as express from 'express';
 
 import { DocName } from '../enum/docName';
 import { EscapeStringRegex } from '../helper/escapeStringRegex';
-import { IPaging } from '../interface/paging';
-import { IParams } from '../interface/params';
-import { IResult } from '../interface/result';
+import { IIdParams, IPaging, IResult } from '../interface/controller';
 import { ITodo } from '../interface/todo';
-import { IdSchema } from '../joi/id';
-import { PagingSchema } from '../joi/paging';
-import { QueryTodoSchema } from '../joi/todo';
-import { ModifyTodoSchema } from '../joi/todo';
-import { CreateTodoSchema } from '../joi/todo';
-import { Validator } from '../joi/validator';
+import { IdSchema, PagingSchema, Validator } from '../joi/controller';
+import { CreateTodoSchema, ModifyTodoSchema, QueryTodoSchema } from '../joi/todo';
 import { CommonQuery } from '../service/commonQuery';
 
 export const all = async (req: express.Request): Promise<IResult<ITodo[]>> => {
@@ -36,7 +30,7 @@ export const list = async (req: express.Request): Promise<IResult<ITodo[]>> => {
 };
 
 const detail = async (req: express.Request): Promise<IResult<ITodo>> => {
-  const query = await Validator.validate<IParams>(req.params, IdSchema);
+  const query = await Validator.validate<IIdParams>(req.params, IdSchema);
   const todo = await CommonQuery.findOneById<ITodo>(query.ID, DocName.Todos);
   if (!todo) {
     return { statusCode: 404, message: 'not found' };
@@ -54,7 +48,7 @@ const create = async (req: express.Request): Promise<IResult<any>> => {
 };
 
 const modify = async (req: express.Request): Promise<IResult<any>> => {
-  const query = await Validator.validate<IParams>(req.params, IdSchema);
+  const query = await Validator.validate<IIdParams>(req.params, IdSchema);
   const body = await Validator.validate<ITodo>(req.body, ModifyTodoSchema);
   const result = await CommonQuery.updateOneById(query.ID, body, DocName.Todos);
   if (result.modifiedCount === 0) {
@@ -64,7 +58,7 @@ const modify = async (req: express.Request): Promise<IResult<any>> => {
 };
 
 const remove = async (req: express.Request): Promise<IResult<any>> => {
-  const query = await Validator.validate<IParams>(req.params, IdSchema);
+  const query = await Validator.validate<IIdParams>(req.params, IdSchema);
   const result = await CommonQuery.deleteOneById(query.ID, DocName.Todos);
   if (result.deletedCount === 0) {
     return { statusCode: 404, message: 'not found' };
@@ -82,7 +76,7 @@ const multiRemove = async (req: express.Request): Promise<IResult<any>> => {
 };
 
 const toggle = async (req: express.Request): Promise<IResult<any>> => {
-  const query = await Validator.validate<IParams>(req.params, IdSchema);
+  const query = await Validator.validate<IIdParams>(req.params, IdSchema);
   const todo = await CommonQuery.findOneById<ITodo>(query.ID, DocName.Todos);
   if (!todo) {
     return { statusCode: 404, message: 'not found' };

@@ -2,7 +2,7 @@ import { ObjectID } from 'mongodb';
 
 import { ConvertObjectID, ConvertObjectIDs } from '../helper/convertObjectID';
 import { GetPaging } from '../helper/paging';
-import { IPaging } from '../interface/paging';
+import { IPaging } from '../interface/controller';
 import { DbClient } from './dbClient';
 
 const insertOne = async<T>(data: any, collectionName: string) => {

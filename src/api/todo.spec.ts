@@ -3,7 +3,7 @@ import 'mocha';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 
-import { Validator } from '../joi/validator';
+import { Validator } from '../joi/controller';
 import { CommonQuery } from '../service/commonQuery';
 import { Todo } from './todo';
 

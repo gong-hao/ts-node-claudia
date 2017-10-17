@@ -3,7 +3,8 @@ import 'mocha';
 import { expect } from 'chai';
 import * as joi from 'joi';
 
-import { Validator } from './validator';
+import { Validator } from './controller';
+
 
 describe('Validator', () => {
   it('should return pass object', async () => {
