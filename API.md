@@ -186,7 +186,7 @@ response:
     "_id": "5a04157a03db7f34d82dc424",
     "Title": "important day!!!",
     "IsDone": false,
-    "CreateOn": "Thu Nov 09 2017 00:44:42 GMT-0800 (太平洋標準時間)",
+    "CreateOn": "2017-10-11T00:48:34.276Z",
     "DoneOn": null
   }
 }
