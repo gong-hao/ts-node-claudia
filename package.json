@@ -5,35 +5,40 @@
   "scripts": {
     "glob": "npm i typescript ts-node nodemon claudia mocha nyc -g",
     "dev": "nodemon -e js,ts --exec \"ts-node\" src/serve",
-    "build": "tsc -p tsconfig.json & copy \"package.json\" \"dist/package.json\"",
+    "build": "tsc -p tsconfig.json & cp \"package.json\" \"dist/package.json\"",
+    "build-win": "tsc -p tsconfig.json & copy \"package.json\" \"dist/package.json\"",
     "create": "claudia create --source dist --handler lambda.handler --deploy-proxy-api --runtime nodejs6.10 --timeout 30 --region us-east-1 --set-env-from-json env.json",
     "update": "claudia update --source dist --set-env-from-json env.json",
-    "test": "nyc mocha src/**/*.spec.ts"
+    "test": "mocha -r ts-node/register \"src/**/*.spec.ts\" --reporter mochawesome",
+    "coverage": "nyc mocha src/**/*.spec.ts"
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",
-    "@types/express": "^4.0.37",
-    "@types/joi": "^10.4.3",
-    "@types/mocha": "^2.2.43",
-    "@types/mongodb": "^2.2.12",
-    "@types/node": "^8.0.32",
-    "@types/sinon": "^2.3.6",
-    "@types/supertest": "^2.0.3",
+    "@types/express": "^4.0.39",
+    "@types/joi": "^10.4.4",
+    "@types/mocha": "^2.2.44",
+    "@types/mongodb": "^2.2.15",
+    "@types/node": "^8.0.50",
+    "@types/sinon": "^2.3.7",
     "chai": "^4.1.2",
+    "cors": "^2.8.4",
+    "i": "^0.3.6",
     "mocha": "^4.0.1",
+    "mochawesome": "^2.3.1",
     "nodemon": "^1.12.1",
-    "nyc": "^11.2.1",
-    "sinon": "^4.0.1",
-    "supertest": "^3.0.0",
+    "npm": "^5.5.1",
+    "nyc": "^11.3.0",
+    "sinon": "^4.1.2",
+    "tingodb": "^0.5.1",
     "ts-node": "^3.3.0",
-    "typescript": "^2.5.3"
+    "typescript": "^2.6.1"
   },
   "dependencies": {
     "aws-serverless-express": "^3.0.2",
     "body-parser": "^1.18.2",
-    "express": "^4.16.1",
-    "joi": "^11.1.1",
-    "mongodb": "^2.2.31"
+    "express": "^4.16.2",
+    "joi": "^13.0.1",
+    "mongodb": "^2.2.33"
   },
   "nyc": {
     "include": [

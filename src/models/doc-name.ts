@@ -1,3 +1,3 @@
 export enum DocName {
-  Todos = 'todos'
+  Todo = 'Todo'
 }

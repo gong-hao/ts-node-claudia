@@ -50,12 +50,24 @@ aws_secret_access_key = YOUR_ACCESS_SECRET
 
 1. Run `npm run build` to compile .ts to .js into `dist folder`. It will also copy package.json into `dist folder` in order to run [`Claudia.js`](https://github.com/claudiajs/claudia).
 
+   > If you are using Windows OS, please run `npm run build-win` instead.
+
 2. Run `npm run create` to initialize [`Claudia.js`](https://github.com/claudiajs/claudia). [`Claudia.js`](https://github.com/claudiajs/claudia) will install packages, zip files, upload to [`Lambda`](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html), setup [`API Gateway`](http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html).
 
 3. Run `npm run update` to update api if you have done `npm run create` before. Be careful to keep claudia.json into `dist folder`. Claudia will generate it after creating api, and use it to update api.
 
-   > See more detail in  [Claudia.js documentation](https://github.com/claudiajs/claudia/tree/master/docs)
+   > See more detail in [Claudia.js documentation](https://github.com/claudiajs/claudia/tree/master/docs)
 
 ## Testing
 
-1. Run `npm run test` to run unit tests. All files with *.spec.ts will be tested.
+This project uses [`mocha`](https://mochajs.org/), [`sinon`](http://sinonjs.org/), and [`chai`](http://chaijs.com/) for unit testing.
+
+All files with *.spec.ts will be tested.
+
+Run `npm run test` to execute all unit tests, and you can see the html report on `/mochawesome-report/mochawesome.html`.
+
+Run `npm run coverage` to execute coverage check, and you can see the html report on `/coverage/index.html`.
+
+## Example API
+
+see [`API.md`](API.md) for API Usages

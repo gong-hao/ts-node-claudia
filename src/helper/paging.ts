@@ -1,60 +1,62 @@
-import { IPaging } from '../interface/controller';
+import { PagingQuery } from '../models/controller/query'
+import { Metadata } from '../models/controller/result'
 
-export const _getSortObject = (sort: string, defaultObj: Object) => {
+const _getSortObject = (sort: string, defaultObj: Object): Object => {
   if (!sort) {
-    return defaultObj;
+    return defaultObj
   }
-  const obj = {};
+  const obj = {}
   sort.split(',').forEach(x => {
-    x = x.trim();
+    x = x.trim()
     if (!x) {
-      return;
+      return
     }
-    const isDesc = x.indexOf('-') === 0;
-    const name = x.replace(/[^0-9a-zA-Z]/, '');
+    const isDesc = x.indexOf('-') === 0
+    const name = x.replace(/[^0-9a-zA-Z]/, '')
     if (isDesc) {
-      obj[name] = -1;
+      obj[name] = -1
     } else {
-      obj[name] = 1;
+      obj[name] = 1
     }
-  });
-  return obj;
-};
+  })
+  return obj
+}
 
-export const _getPageUrl = (path: string, currentPage: number, newPage: number) => {
+const _getPageUrl = (path: string, currentPage: number, newPage: number) => {
   if (currentPage === newPage) {
-    return null;
+    return null
   }
-  const arr = path.split(/[?&]/);
-  let result = '';
-  let counter = 0;
+  const arr = path.split(/[?&]/)
+  let result = ''
+  let counter = 0
   for (let i = 0; i < arr.length; i++) {
-    const part = arr[i].trim();
+    const part = arr[i].trim()
     if (!part) {
-      continue;
+      continue
     }
     const prefix =
       counter === 0 ? '' :
-        counter === 1 ? '?' : '&';
-    counter++;
+        counter === 1 ? '?' : '&'
+    counter++
     if (part === 'Page=' + currentPage) {
-      result += prefix + 'Page=' + newPage;
-      continue;
+      result += prefix + 'Page=' + newPage
+      continue
     }
-    result += prefix + part;
+    result += prefix + part
   }
-  return result;
-};
+  return result
+}
 
-export const _getMetadata = (count: number, paging: IPaging, url: string, sortObj: Object) => {
-  const first = 1;
-  const last = Math.floor(count / paging.Limit) + (count % paging.Limit > 0 ? 1 : 0);
-  const previous = paging.Page === 1 ? 1 : paging.Page - 1;
-  const next = paging.Page === last ? last : paging.Page + 1;
-  const pageExist = paging.Page > 0 && paging.Page <= last;
-  const metadata = {
+const _getMetadata = (count: number, paging: PagingQuery, url: string, sortObj: Object): Metadata => {
+  const first = 1
+  const last = Math.floor(count / paging.Limit) + (count % paging.Limit > 0 ? 1 : 0)
+  const previous = paging.Page === 1 ? 1 : paging.Page - 1
+  const next = paging.Page === last ? last : paging.Page + 1
+  const pageExist = paging.Page > 0 && paging.Page <= last
+  const metadata: Metadata = {
     count: count,
     page: pageExist ? paging.Page : -1,
+    last: pageExist ? last : -1,
     limit: paging.Limit,
     sort: sortObj,
     links: pageExist ? {
@@ -64,12 +66,19 @@ export const _getMetadata = (count: number, paging: IPaging, url: string, sortOb
       next: _getPageUrl(url, paging.Page, next),
       last: _getPageUrl(url, paging.Page, last)
     } : null
-  };
-  return metadata;
-};
+  }
+  return metadata
+}
 
-export const getPaging = (count: number, paging: IPaging, url: string, defaultSortObj: Object) => {
-  const sort = _getSortObject(paging.Sort, defaultSortObj);
-  const metadata = _getMetadata(count, paging, url, sort);
-  return metadata;
-};
+const getPaging = (count: number, paging: PagingQuery, url: string, defaultSortObj: Object): Metadata => {
+  const sort = _getSortObject(paging.Sort, defaultSortObj)
+  const metadata = _getMetadata(count, paging, url, sort)
+  return metadata
+}
+
+export const Paging = {
+  _getSortObject,
+  _getPageUrl,
+  _getMetadata,
+  getPaging
+}
