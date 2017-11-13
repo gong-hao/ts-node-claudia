@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import * as sinon from 'sinon'
 
 import { TodoMultiRemove } from '.'
-import { CommonQuery } from '../../service/common-query'
+import { CommonQueryService } from '../../service/common-query.service'
 
 describe('test TodoMultiRemove.controller', () => {
   let deleteManyByIdsStub
@@ -16,7 +16,7 @@ describe('test TodoMultiRemove.controller', () => {
   it('should return 204', async () => {
     const body = { foo: 'bar' }
     const req: any = { body }
-    deleteManyByIdsStub = sinon.stub(CommonQuery, 'deleteManyByIds').returns({ deletedCount: 3 })
+    deleteManyByIdsStub = sinon.stub(CommonQueryService, 'deleteManyByIds').returns({ deletedCount: 3 })
     const actual = await TodoMultiRemove.controller(req)
     const excepted = {
       statusCode: 204
@@ -27,7 +27,7 @@ describe('test TodoMultiRemove.controller', () => {
   it('should return 404 if todo is not found', async () => {
     const body = { foo: 'bar' }
     const req: any = { body }
-    deleteManyByIdsStub = sinon.stub(CommonQuery, 'deleteManyByIds').returns({ deletedCount: 0 })
+    deleteManyByIdsStub = sinon.stub(CommonQueryService, 'deleteManyByIds').returns({ deletedCount: 0 })
     const actual = await TodoMultiRemove.controller(req)
     const excepted = { statusCode: 404, message: 'todo not found' }
     expect(actual).is.deep.equal(excepted)

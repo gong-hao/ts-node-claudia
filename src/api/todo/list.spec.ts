@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import * as sinon from 'sinon'
 
 import { TodoList } from '.'
-import { CommonQuery } from '../../service/common-query'
+import { CommonQueryService } from '../../service/common-query.service'
 
 describe('test TodoList.controller.controller', () => {
   let findWithPagingStub
@@ -17,7 +17,7 @@ describe('test TodoList.controller.controller', () => {
     const query = {}
     const req: any = { query }
     const result = { data: {}, metadata: {} }
-    findWithPagingStub = sinon.stub(CommonQuery, 'findWithPaging').returns(result)
+    findWithPagingStub = sinon.stub(CommonQueryService, 'findWithPaging').returns(result)
     const actual = await TodoList.controller(req)
     const excepted = {
       statusCode: 200,
@@ -30,7 +30,7 @@ describe('test TodoList.controller.controller', () => {
     const query = { Title: 'title' }
     const req: any = { query }
     const result = { data: {}, metadata: {} }
-    findWithPagingStub = sinon.stub(CommonQuery, 'findWithPaging').returns(result)
+    findWithPagingStub = sinon.stub(CommonQueryService, 'findWithPaging').returns(result)
     const actual = await TodoList.controller(req)
     const excepted = {
       statusCode: 200,

@@ -4,15 +4,15 @@ import { expect } from 'chai'
 import { MongoClient, ObjectID } from 'mongodb'
 import * as sinon from 'sinon'
 
-import { CommonQuery } from './common-query'
-import { DbClient } from './db-client'
+import { CommonQueryService } from './common-query.service'
+import { DbClientService } from './db-client.service'
 
 describe('test DbClient.getDb', () => {
   let mongoClientStub
 
   afterEach(() => {
     mongoClientStub.restore()
-    DbClient._db = null
+    DbClientService._db = null
   })
 
   it('should insertOne', async () => {
@@ -22,7 +22,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.insertOne({}, 'collectionName')
+    const actual = await CommonQueryService.insertOne({}, 'collectionName')
     expect(actual.insertedCount).is.deep.equals(1)
   })
 
@@ -33,7 +33,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.insertMany([{}, {}], 'collectionName')
+    const actual = await CommonQueryService.insertMany([{}, {}], 'collectionName')
     expect(actual.insertedCount).is.deep.equals(2)
   })
 
@@ -44,7 +44,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.updateOneById(new ObjectID(), {}, 'collectionName')
+    const actual = await CommonQueryService.updateOneById(new ObjectID(), {}, 'collectionName')
     expect(actual.modifiedCount).is.deep.equals(1)
   })
 
@@ -55,7 +55,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.updateOneByQuery({}, {}, 'collectionName')
+    const actual = await CommonQueryService.updateOneByQuery({}, {}, 'collectionName')
     expect(actual.modifiedCount).is.deep.equals(1)
   })
 
@@ -66,7 +66,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.updateManyByIds([new ObjectID(), new ObjectID()], {}, 'collectionName')
+    const actual = await CommonQueryService.updateManyByIds([new ObjectID(), new ObjectID()], {}, 'collectionName')
     expect(actual.modifiedCount).is.deep.equals(2)
   })
 
@@ -77,7 +77,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.updateManyByQuery({}, {}, 'collectionName')
+    const actual = await CommonQueryService.updateManyByQuery({}, {}, 'collectionName')
     expect(actual.modifiedCount).is.deep.equals(2)
   })
 
@@ -88,7 +88,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.deleteOneById(new ObjectID(), 'collectionName')
+    const actual = await CommonQueryService.deleteOneById(new ObjectID(), 'collectionName')
     expect(actual.deletedCount).is.deep.equals(1)
   })
 
@@ -99,7 +99,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.deleteOneByQuery({}, 'collectionName')
+    const actual = await CommonQueryService.deleteOneByQuery({}, 'collectionName')
     expect(actual.deletedCount).is.deep.equals(1)
   })
 
@@ -110,7 +110,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.deleteManyByIds([new ObjectID(), new ObjectID()], 'collectionName')
+    const actual = await CommonQueryService.deleteManyByIds([new ObjectID(), new ObjectID()], 'collectionName')
     expect(actual.deletedCount).is.deep.equals(2)
   })
 
@@ -121,7 +121,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.deleteManyByQuery({}, 'collectionName')
+    const actual = await CommonQueryService.deleteManyByQuery({}, 'collectionName')
     expect(actual.deletedCount).is.deep.equals(2)
   })
 
@@ -133,7 +133,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.findOneById(new ObjectID(), 'collectionName')
+    const actual = await CommonQueryService.findOneById(new ObjectID(), 'collectionName')
     expect(actual).is.deep.equals(data)
   })
 
@@ -145,7 +145,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.findOneByQuery({}, 'collectionName')
+    const actual = await CommonQueryService.findOneByQuery({}, 'collectionName')
     expect(actual).is.deep.equals(data)
   })
 
@@ -159,7 +159,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.findManyByIds([new ObjectID(), new ObjectID()], 'collectionName')
+    const actual = await CommonQueryService.findManyByIds([new ObjectID(), new ObjectID()], 'collectionName')
     expect(actual).is.deep.equals(data)
   })
 
@@ -173,7 +173,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.findManyByQuery({}, 'collectionName')
+    const actual = await CommonQueryService.findManyByQuery({}, 'collectionName')
     expect(actual).is.deep.equals(data)
   })
 
@@ -206,7 +206,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.findWithPaging({}, 'collectionName', url, pagingObj)
+    const actual = await CommonQueryService.findWithPaging({}, 'collectionName', url, pagingObj)
     const excepted = {
       data: data,
       metadata: {
@@ -216,13 +216,13 @@ describe('test DbClient.getDb', () => {
         limit: 5,
         sort: { sort: 1 },
         links:
-        {
-          first: '/test?Page=1&Limit=2&Sort=-sort',
-          previous: '/test?Page=1&Limit=2&Sort=-sort',
-          current: '/test?Page=2&Limit=2&Sort=-sort',
-          next: '/test?Page=3&Limit=2&Sort=-sort',
-          last: '/test?Page=3&Limit=2&Sort=-sort'
-        }
+          {
+            first: '/test?Page=1&Limit=2&Sort=-sort',
+            previous: '/test?Page=1&Limit=2&Sort=-sort',
+            current: '/test?Page=2&Limit=2&Sort=-sort',
+            next: '/test?Page=3&Limit=2&Sort=-sort',
+            last: '/test?Page=3&Limit=2&Sort=-sort'
+          }
       }
     }
     expect(actual).is.deep.equals(excepted)
@@ -260,7 +260,7 @@ describe('test DbClient.getDb', () => {
       })
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await CommonQuery.findWithPaging({}, 'collectionName', url, pagingObj, defaultSortObj)
+    const actual = await CommonQueryService.findWithPaging({}, 'collectionName', url, pagingObj, defaultSortObj)
     const excepted = {
       data: data,
       metadata: {
@@ -270,13 +270,13 @@ describe('test DbClient.getDb', () => {
         limit: 5,
         sort: { sort: 1 },
         links:
-        {
-          first: '/test?Page=1&Limit=2&Sort=-sort',
-          previous: '/test?Page=1&Limit=2&Sort=-sort',
-          current: '/test?Page=2&Limit=2&Sort=-sort',
-          next: '/test?Page=3&Limit=2&Sort=-sort',
-          last: '/test?Page=3&Limit=2&Sort=-sort'
-        }
+          {
+            first: '/test?Page=1&Limit=2&Sort=-sort',
+            previous: '/test?Page=1&Limit=2&Sort=-sort',
+            current: '/test?Page=2&Limit=2&Sort=-sort',
+            next: '/test?Page=3&Limit=2&Sort=-sort',
+            last: '/test?Page=3&Limit=2&Sort=-sort'
+          }
       }
     }
     expect(actual).is.deep.equals(excepted)

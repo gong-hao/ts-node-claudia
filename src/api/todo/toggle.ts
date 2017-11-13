@@ -4,13 +4,13 @@ import { IdParams } from '../../models/controller/params'
 import { Result } from '../../models/controller/result'
 import { DocName } from '../../models/doc-name'
 import { Todo } from '../../models/todo'
-import { CommonQuery } from '../../service/common-query'
-import { BaseSchema } from '../../validation/base'
+import { CommonQueryService } from '../../service/common-query.service'
+import { BaseSchema } from '../../validation/base-schema'
 import { Validator } from '../../validation/validator'
 
 const controller = async (req: express.Request): Promise<Result<any>> => {
   const params = await Validator.validate<IdParams>(req.params, BaseSchema.id())
-  const todo = await CommonQuery.findOneById<Todo>(params.ID, DocName.Todo)
+  const todo = await CommonQueryService.findOneById<Todo>(params.ID, DocName.Todo)
   if (!todo) {
     return { statusCode: 404, message: 'todo not found' }
   }
@@ -22,7 +22,7 @@ const controller = async (req: express.Request): Promise<Result<any>> => {
       DoneOn: doneOn
     }
   }
-  await CommonQuery.updateOneById(todo._id, update, DocName.Todo)
+  await CommonQueryService.updateOneById(todo._id, update, DocName.Todo)
   return { statusCode: 200 }
 }
 

@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import * as sinon from 'sinon'
 
 import { TodoDetail } from '.'
-import { CommonQuery } from '../../service/common-query'
+import { CommonQueryService } from '../../service/common-query.service'
 
 describe('test TodoDetail.controller', () => {
   let findOneByIdStub
@@ -17,7 +17,7 @@ describe('test TodoDetail.controller', () => {
     const params = { ID: '59decd8976ed91e7b430e97e' }
     const req: any = { params }
     const data = { foo: 'bar' }
-    findOneByIdStub = sinon.stub(CommonQuery, 'findOneById').returns(data)
+    findOneByIdStub = sinon.stub(CommonQueryService, 'findOneById').returns(data)
     const actual = await TodoDetail.controller(req)
     const excepted = {
       statusCode: 200,
@@ -30,7 +30,7 @@ describe('test TodoDetail.controller', () => {
     const params = { ID: '59decd8976ed91e7b430e97e' }
     const req: any = { params }
     const data = { foo: 'bar' }
-    findOneByIdStub = sinon.stub(CommonQuery, 'findOneById').returns(undefined)
+    findOneByIdStub = sinon.stub(CommonQueryService, 'findOneById').returns(undefined)
     const actual = await TodoDetail.controller(req)
     const excepted = {
       statusCode: 404,

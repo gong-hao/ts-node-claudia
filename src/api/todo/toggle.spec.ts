@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import * as sinon from 'sinon'
 
 import { TodoToggle } from '.'
-import { CommonQuery } from '../../service/common-query'
+import { CommonQueryService } from '../../service/common-query.service'
 
 describe('test TodoToggle.controller', () => {
   let findOneByIdStub
@@ -19,8 +19,8 @@ describe('test TodoToggle.controller', () => {
     const params = { ID: '59decd8976ed91e7b430e97e' }
     const req: any = { params }
     const data = { foo: 'bar' }
-    findOneByIdStub = sinon.stub(CommonQuery, 'findOneById').returns(data)
-    updateOneByIdStub = sinon.stub(CommonQuery, 'updateOneById').returns({})
+    findOneByIdStub = sinon.stub(CommonQueryService, 'findOneById').returns(data)
+    updateOneByIdStub = sinon.stub(CommonQueryService, 'updateOneById').returns({})
     const actual = await TodoToggle.controller(req)
     const excepted = {
       statusCode: 200
@@ -32,8 +32,8 @@ describe('test TodoToggle.controller', () => {
     const params = { ID: '59decd8976ed91e7b430e97e' }
     const req: any = { params }
     const data = { foo: 'bar', IsDone: true }
-    findOneByIdStub = sinon.stub(CommonQuery, 'findOneById').returns(data)
-    updateOneByIdStub = sinon.stub(CommonQuery, 'updateOneById').returns({})
+    findOneByIdStub = sinon.stub(CommonQueryService, 'findOneById').returns(data)
+    updateOneByIdStub = sinon.stub(CommonQueryService, 'updateOneById').returns({})
     const actual = await TodoToggle.controller(req)
     const excepted = {
       statusCode: 200
@@ -44,8 +44,8 @@ describe('test TodoToggle.controller', () => {
   it('should return 404 if todo is not found', async () => {
     const params = { ID: '59decd8976ed91e7b430e97e' }
     const req: any = { params }
-    findOneByIdStub = sinon.stub(CommonQuery, 'findOneById').returns(undefined)
-    updateOneByIdStub = sinon.stub(CommonQuery, 'updateOneById').returns({})
+    findOneByIdStub = sinon.stub(CommonQueryService, 'findOneById').returns(undefined)
+    updateOneByIdStub = sinon.stub(CommonQueryService, 'updateOneById').returns({})
     const actual = await TodoToggle.controller(req)
     const excepted = { statusCode: 404, message: 'todo not found' }
     expect(actual).is.deep.equal(excepted)

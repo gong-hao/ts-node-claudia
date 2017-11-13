@@ -4,22 +4,22 @@ import { expect } from 'chai'
 import { MongoClient } from 'mongodb'
 import * as sinon from 'sinon'
 
-import { DbClient } from './db-client'
+import { DbClientService } from './db-client.service'
 
-describe('test DbClient.getDb', () => {
+describe('test DbClientService.getDb', () => {
   it('should return new connected db', async () => {
     const db = { name: 'new db' }
     const mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
-    const actual = await DbClient.getDb()
+    const actual = await DbClientService.getDb()
     mongoClientStub.restore()
-    DbClient._db = null
+    DbClientService._db = null
     expect(actual).is.deep.equals(db)
   })
 
   it('should return the same db', async () => {
     const db = { name: 'same db' }
-    DbClient._db = db
-    const actual = await DbClient.getDb()
+    DbClientService._db = db
+    const actual = await DbClientService.getDb()
     expect(actual).is.deep.equals(db)
   })
 })

@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import * as sinon from 'sinon'
 
 import { TodoModify } from '.'
-import { CommonQuery } from '../../service/common-query'
+import { CommonQueryService } from '../../service/common-query.service'
 
 describe('test TodoModify.controller', () => {
   let updateOneByIdStub
@@ -17,7 +17,7 @@ describe('test TodoModify.controller', () => {
     const params = { ID: '59decd8976ed91e7b430e97e' }
     const body = { Title: 'something need to do' }
     const req: any = { params, body }
-    updateOneByIdStub = sinon.stub(CommonQuery, 'updateOneById').returns({ modifiedCount: 1 })
+    updateOneByIdStub = sinon.stub(CommonQueryService, 'updateOneById').returns({ modifiedCount: 1 })
     const actual = await TodoModify.controller(req)
     const excepted = {
       statusCode: 201
@@ -29,7 +29,7 @@ describe('test TodoModify.controller', () => {
     const params = { ID: '59decd8976ed91e7b430e97e' }
     const body = { Title: 'something need to do' }
     const req: any = { params, body }
-    updateOneByIdStub = sinon.stub(CommonQuery, 'updateOneById').returns({ modifiedCount: 0 })
+    updateOneByIdStub = sinon.stub(CommonQueryService, 'updateOneById').returns({ modifiedCount: 0 })
     const actual = await TodoModify.controller(req)
     const excepted = { statusCode: 404, message: 'todo not found' }
     expect(actual).is.deep.equal(excepted)

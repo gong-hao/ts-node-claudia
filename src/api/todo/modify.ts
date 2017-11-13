@@ -5,8 +5,8 @@ import { IdParams } from '../../models/controller/params'
 import { Result } from '../../models/controller/result'
 import { DocName } from '../../models/doc-name'
 import { Todo } from '../../models/todo'
-import { CommonQuery } from '../../service/common-query'
-import { BaseSchema } from '../../validation/base'
+import { CommonQueryService } from '../../service/common-query.service'
+import { BaseSchema } from '../../validation/base-schema'
 import { Validator } from '../../validation/validator'
 
 
@@ -16,7 +16,7 @@ const controller = async (req: express.Request): Promise<Result<any>> => {
   const update = {
     $set: body
   }
-  const result = await CommonQuery.updateOneById(params.ID, update, DocName.Todo)
+  const result = await CommonQueryService.updateOneById(params.ID, update, DocName.Todo)
   if (result.modifiedCount === 0) {
     return { statusCode: 404, message: 'todo not found' }
   }
