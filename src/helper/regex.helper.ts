@@ -1,14 +1,14 @@
-const _getEscapeString = (input: string): string => {
+const _getEscapedString = (input: string): string => {
   const escape = input.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
   return escape
 }
 
-const escapeRegex = (input: string): RegExp => {
-  const escape = _getEscapeString(input)
-  return new RegExp(escape)
+const escape = (input: string): RegExp => {
+  const escapedString = _getEscapedString(input)
+  return new RegExp(escapedString)
 }
 
 export const RegexHelper = {
-  _getEscapeString,
-  escapeRegex
+  _getEscapedString,
+  escape
 }

@@ -15,7 +15,7 @@ const controller = async (req: express.Request): Promise<PagingResult<Todo[]>> =
   const paging = await Validator.validate<PagingQuery>(req.query, BaseSchema.paging())
   const conditions: any = {}
   if (query.Title) {
-    conditions.Title = RegexHelper.escapeRegex(query.Title)
+    conditions.Title = RegexHelper.escape(query.Title)
   }
   const result = await CommonQueryService.findWithPaging<Todo>(conditions, DocName.Todo, req.url, paging)
   return { statusCode: 200, ...result }
