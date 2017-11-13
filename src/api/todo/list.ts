@@ -1,7 +1,7 @@
 import * as express from 'express'
 
 import { TodoSchema } from '.'
-import { Regex } from '../../helper/regex'
+import { RegexHelper } from '../../helper/regex.helper'
 import { PagingQuery } from '../../models/controller/query'
 import { PagingResult } from '../../models/controller/result'
 import { DocName } from '../../models/doc-name'
@@ -15,7 +15,7 @@ const controller = async (req: express.Request): Promise<PagingResult<Todo[]>> =
   const paging = await Validator.validate<PagingQuery>(req.query, BaseSchema.paging())
   const conditions: any = {}
   if (query.Title) {
-    conditions.Title = { $regex: Regex.escapeRegex(query.Title) }
+    conditions.Title = { $regex: RegexHelper.escapeRegex(query.Title) }
   }
   const result = await CommonQueryService.findWithPaging<Todo>(conditions, DocName.Todo, req.url, paging)
   return { statusCode: 200, ...result }

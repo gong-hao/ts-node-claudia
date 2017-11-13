@@ -1,8 +1,8 @@
 import * as bodyParser from 'body-parser'
 import * as express from 'express'
 
-import notFound from './router/not-found'
-import todo from './router/todo'
+import notFoundRouter from './router/not-found.router'
+import todoRouter from './router/todo.router'
 
 export default (action?): any => {
   const app = express()
@@ -16,8 +16,8 @@ export default (action?): any => {
     extended: false
   }))
 
-  app.use('/', todo)
-  app.use('/', notFound)
+  app.use('/', todoRouter)
+  app.use('/', notFoundRouter)
 
   return app
 }

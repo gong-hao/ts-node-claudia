@@ -3,6 +3,6 @@ const escapeRegex = (input: string): string => {
   return escape
 }
 
-export const Regex = {
+export const RegexHelper = {
   escapeRegex
 }

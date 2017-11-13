@@ -76,7 +76,7 @@ const getPaging = (count: number, paging: PagingQuery, url: string, defaultSortO
   return metadata
 }
 
-export const Paging = {
+export const PagingHelper = {
   _getSortObject,
   _getPageUrl,
   _getMetadata,

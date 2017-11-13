@@ -12,7 +12,7 @@ const toObjectIDs = (ids: string[] | ObjectID[]): ObjectID[] => {
   return _ids.map(id => toObjectID(id))
 }
 
-export const Convert = {
+export const ConvertHelper = {
   toObjectID,
   toObjectIDs
 }

@@ -2,13 +2,13 @@ import 'mocha'
 
 import { expect } from 'chai'
 
-import { Paging } from './paging'
+import { PagingHelper } from './paging.helper'
 
-describe('test Paging._getSortObject', () => {
+describe('test PagingHelper._getSortObject', () => {
   it('should return an sort object when using "Views,-CreateOn,+Title"', () => {
     const sort = 'Views,-CreateOn,+Title'
     const defaultObj = { CreateOn: -1 }
-    const actual = Paging._getSortObject(sort, defaultObj)
+    const actual = PagingHelper._getSortObject(sort, defaultObj)
     const expected = {
       Views: 1,
       CreateOn: -1,
@@ -20,7 +20,7 @@ describe('test Paging._getSortObject', () => {
   it('should return an sort object when using "Views, -CreateOn, +Title"', () => {
     const sort = 'Views, -CreateOn, +Title'
     const defaultObj = { CreateOn: -1 }
-    const actual = Paging._getSortObject(sort, defaultObj)
+    const actual = PagingHelper._getSortObject(sort, defaultObj)
     const expected = {
       Views: 1,
       CreateOn: -1,
@@ -32,7 +32,7 @@ describe('test Paging._getSortObject', () => {
   it('should return an sort object when using ", Views, -CreateOn, +Title"', () => {
     const sort = ', Views, -CreateOn, +Title'
     const defaultObj = { CreateOn: -1 }
-    const actual = Paging._getSortObject(sort, defaultObj)
+    const actual = PagingHelper._getSortObject(sort, defaultObj)
     const expected = {
       Views: 1,
       CreateOn: -1,
@@ -44,7 +44,7 @@ describe('test Paging._getSortObject', () => {
   it('should return an default sort object when not passing sort param', () => {
     const sort = null
     const defaultObj = { CreateOn: -1 }
-    const actual = Paging._getSortObject(sort, defaultObj)
+    const actual = PagingHelper._getSortObject(sort, defaultObj)
     const expected = {
       CreateOn: -1
     }
@@ -52,39 +52,39 @@ describe('test Paging._getSortObject', () => {
   })
 })
 
-describe('test Paging._getPageUrl', () => {
+describe('test PagingHelper._getPageUrl', () => {
   it('should change the url to "Page=1" if it is the first page', () => {
-    const actual = Paging._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 1)
+    const actual = PagingHelper._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 1)
     expect(actual).equal('/todo?Page=1&Limit=2&Sort=Title,-CreateOn')
   })
 
   it('should change the url to "Page=2" if it is the previous page', () => {
-    const actual = Paging._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 2)
+    const actual = PagingHelper._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 2)
     expect(actual).equal('/todo?Page=2&Limit=2&Sort=Title,-CreateOn')
   })
 
   it('should change the url to null if it is the current page', () => {
-    const actual = Paging._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 3)
+    const actual = PagingHelper._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 3)
     expect(actual).is.null
   })
 
   it('should change the url to "Page=4" if it is the next page', () => {
-    const actual = Paging._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 4)
+    const actual = PagingHelper._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 4)
     expect(actual).equal('/todo?Page=4&Limit=2&Sort=Title,-CreateOn')
   })
 
   it('should change the url to "Page=5" if it is the last page', () => {
-    const actual = Paging._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 5)
+    const actual = PagingHelper._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 5)
     expect(actual).equal('/todo?Page=5&Limit=2&Sort=Title,-CreateOn')
   })
 
   it('should skip extra ? or &', () => {
-    const actual = Paging._getPageUrl('/todo???Page=3&&&Limit=2&Sort=Title,-CreateOn', 3, 2)
+    const actual = PagingHelper._getPageUrl('/todo???Page=3&&&Limit=2&Sort=Title,-CreateOn', 3, 2)
     expect(actual).equal('/todo?Page=2&Limit=2&Sort=Title,-CreateOn')
   })
 })
 
-describe('test Paging._getMetadata', () => {
+describe('test PagingHelper._getMetadata', () => {
   it('should return correct metadata when using sortObj', () => {
     const count = 13
     const paging = {
@@ -97,7 +97,7 @@ describe('test Paging._getMetadata', () => {
       CreateOn: -1
     }
     const path = '/todo?Page=1&Limit=2&Sort=Title,-CreateOn'
-    const actual = Paging._getMetadata(count, paging, path, sortObj)
+    const actual = PagingHelper._getMetadata(count, paging, path, sortObj)
     const expected = {
       count: 13,
       page: 1,
@@ -130,7 +130,7 @@ describe('test Paging._getMetadata', () => {
       CreateOn: -1
     }
     const path = '/todo?Page=1&Limit=2&Sort=Title,-CreateOn'
-    const actual = Paging._getMetadata(count, paging, path, sortObj)
+    const actual = PagingHelper._getMetadata(count, paging, path, sortObj)
     const expected = {
       count: 10,
       page: 1,
@@ -163,7 +163,7 @@ describe('test Paging._getMetadata', () => {
       CreateOn: -1
     }
     const path = '/todo?Page=7&Limit=2&Sort=Title,-CreateOn'
-    const actual = Paging._getMetadata(count, paging, path, sortObj)
+    const actual = PagingHelper._getMetadata(count, paging, path, sortObj)
     const expected = {
       count: 13,
       page: 7,
@@ -196,7 +196,7 @@ describe('test Paging._getMetadata', () => {
       CreateOn: -1
     }
     const path = '/todo?Page=0&Limit=2&Sort=Title,-CreateOn'
-    const actual = Paging._getMetadata(count, paging, path, sortObj)
+    const actual = PagingHelper._getMetadata(count, paging, path, sortObj)
     const expected = {
       count: 13,
       page: -1,
@@ -223,7 +223,7 @@ describe('test Paging._getMetadata', () => {
       CreateOn: -1
     }
     const path = '/todo?Page=99&Limit=2&Sort=Title,-CreateOn'
-    const actual = Paging._getMetadata(count, paging, path, sortObj)
+    const actual = PagingHelper._getMetadata(count, paging, path, sortObj)
     const expected = {
       count: 13,
       page: -1,
@@ -239,7 +239,7 @@ describe('test Paging._getMetadata', () => {
   })
 })
 
-describe('test Paging.getPaging', () => {
+describe('test PagingHelper.getPagingHelper', () => {
   it('should return correct metadata when using defaultSortObj', () => {
     const count = 13
     const paging = {
@@ -251,7 +251,7 @@ describe('test Paging.getPaging', () => {
       CreateOn: -1
     }
     const path = '/todo?Page=1&Limit=2&Sort=Title,-CreateOn'
-    const actual = Paging.getPaging(count, paging, path, defaultSortObj)
+    const actual = PagingHelper.getPaging(count, paging, path, defaultSortObj)
     const expected = {
       count: 13,
       page: 1,

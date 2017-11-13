@@ -6,8 +6,8 @@ import {
   UpdateWriteOpResult,
 } from 'mongodb'
 
-import { Convert } from '../helper/convert'
-import { Paging } from '../helper/paging'
+import { ConvertHelper } from '../helper/convert.helper'
+import { PagingHelper } from '../helper/paging.helper'
 import { PagingQuery } from '../models/controller/query'
 import { Metadata } from '../models/controller/result'
 import { DbClientService } from './db-client.service'
@@ -24,7 +24,7 @@ const insertMany = async<T>(data: any[], collectionName: string): Promise<Insert
 
 const updateOneById = async<T>(id: string | ObjectID, update: any, collectionName: string): Promise<UpdateWriteOpResult> => {
   const conditions = {
-    _id: Convert.toObjectID(id)
+    _id: ConvertHelper.toObjectID(id)
   }
   return updateOneByQuery<T>(conditions, update, collectionName)
 }
@@ -36,7 +36,7 @@ const updateOneByQuery = async<T>(conditions: any, update: any, collectionName: 
 
 const updateManyByIds = async<T>(ids: string[] | ObjectID[], update: any, collectionName: string): Promise<UpdateWriteOpResult> => {
   const conditions = {
-    _id: { $in: Convert.toObjectIDs(ids) }
+    _id: { $in: ConvertHelper.toObjectIDs(ids) }
   }
   return updateManyByQuery<T>(conditions, update, collectionName)
 }
@@ -48,7 +48,7 @@ const updateManyByQuery = async<T>(conditions: any, update: any, collectionName:
 
 const deleteOneById = async<T>(id: string | ObjectID, collectionName: string): Promise<DeleteWriteOpResultObject> => {
   const conditions = {
-    _id: Convert.toObjectID(id)
+    _id: ConvertHelper.toObjectID(id)
   }
   return deleteOneByQuery<T>(conditions, collectionName)
 }
@@ -60,7 +60,7 @@ const deleteOneByQuery = async<T>(conditions: any, collectionName: string): Prom
 
 const deleteManyByIds = async<T>(ids: string[] | ObjectID[], collectionName: string): Promise<DeleteWriteOpResultObject> => {
   const conditions = {
-    _id: { $in: Convert.toObjectIDs(ids) }
+    _id: { $in: ConvertHelper.toObjectIDs(ids) }
   }
   return deleteManyByQuery<T>(conditions, collectionName)
 }
@@ -72,7 +72,7 @@ const deleteManyByQuery = async<T>(conditions: any, collectionName: string): Pro
 
 const findOneById = async<T>(id: string | ObjectID, collectionName: string): Promise<T> => {
   const conditions = {
-    _id: Convert.toObjectID(id)
+    _id: ConvertHelper.toObjectID(id)
   }
   return findOneByQuery<T>(conditions, collectionName)
 }
@@ -84,7 +84,7 @@ const findOneByQuery = async<T>(conditions: any, collectionName: string): Promis
 
 const findManyByIds = async<T>(ids: string[] | ObjectID[], collectionName: string): Promise<T[]> => {
   const conditions = {
-    _id: { $in: Convert.toObjectIDs(ids) }
+    _id: { $in: ConvertHelper.toObjectIDs(ids) }
   }
   return findManyByQuery<T>(conditions, collectionName)
 }
@@ -103,7 +103,7 @@ const findWithPaging = async<T>(
   const db = await DbClientService.getDb()
   const dbQuery = db.collection<T>(collectionName).find(conditions)
   const count = await dbQuery.count()
-  const metadata = Paging.getPaging(count, paging, url, defaultSortObj)
+  const metadata = PagingHelper.getPaging(count, paging, url, defaultSortObj)
   const data = await dbQuery
     .sort(metadata.sort)
     .skip(paging.Limit * (paging.Page - 1))
