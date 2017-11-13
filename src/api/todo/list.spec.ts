@@ -23,7 +23,7 @@ describe('test TodoList.controller.controller', () => {
       statusCode: 200,
       ...result
     }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 
   it('should return 200 if using Title querystring', async () => {
@@ -36,6 +36,6 @@ describe('test TodoList.controller.controller', () => {
       statusCode: 200,
       ...result
     }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 })

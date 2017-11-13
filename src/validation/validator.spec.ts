@@ -14,7 +14,7 @@ describe('test Validator', () => {
       foo: 'bar'
     }
     const actual = await Validator.validate<{ foo: string }>(input, schema)
-    expect(actual.foo).is.equal('bar')
+    expect(actual.foo).equals('bar')
   })
 
   it('should throw error object', async () => {

@@ -13,13 +13,13 @@ describe('test DbClientService.getDb', () => {
     const actual = await DbClientService.getDb()
     mongoClientStub.restore()
     DbClientService._db = null
-    expect(actual).is.deep.equals(db)
+    expect(actual).deep.equals(db)
   })
 
   it('should return the same db', async () => {
     const db = { name: 'same db' }
     DbClientService._db = db
     const actual = await DbClientService.getDb()
-    expect(actual).is.deep.equals(db)
+    expect(actual).deep.equals(db)
   })
 })

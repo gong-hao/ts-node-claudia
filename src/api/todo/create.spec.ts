@@ -22,7 +22,7 @@ describe('test TodoCreate.controller', () => {
       statusCode: 201,
       data: { insertedId: 'insertedId' }
     }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 
   it('should return 500 if ', async () => {
@@ -31,6 +31,6 @@ describe('test TodoCreate.controller', () => {
     insertOneStub = sinon.stub(CommonQueryService, 'insertOne').returns({ insertedCount: 0 })
     const actual = await TodoCreate.controller(req)
     const excepted = { statusCode: 500, message: 'insert failed' }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 })

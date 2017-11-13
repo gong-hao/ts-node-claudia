@@ -23,7 +23,7 @@ describe('test TodoDetail.controller', () => {
       statusCode: 200,
       data: data
     }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 
   it('should return 404 if todo is not found', async () => {
@@ -36,6 +36,6 @@ describe('test TodoDetail.controller', () => {
       statusCode: 404,
       message: 'todo not found'
     }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 })

@@ -21,7 +21,7 @@ describe('test TodoMultiRemove.controller', () => {
     const excepted = {
       statusCode: 204
     }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 
   it('should return 404 if todo is not found', async () => {
@@ -30,6 +30,6 @@ describe('test TodoMultiRemove.controller', () => {
     deleteManyByIdsStub = sinon.stub(CommonQueryService, 'deleteManyByIds').returns({ deletedCount: 0 })
     const actual = await TodoMultiRemove.controller(req)
     const excepted = { statusCode: 404, message: 'todo not found' }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 })

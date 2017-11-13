@@ -25,7 +25,7 @@ describe('test TodoToggle.controller', () => {
     const excepted = {
       statusCode: 200
     }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 
   it('should return 200 if using IsDone prop in body', async () => {
@@ -38,7 +38,7 @@ describe('test TodoToggle.controller', () => {
     const excepted = {
       statusCode: 200
     }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 
   it('should return 404 if todo is not found', async () => {
@@ -48,6 +48,6 @@ describe('test TodoToggle.controller', () => {
     updateOneByIdStub = sinon.stub(CommonQueryService, 'updateOneById').returns({})
     const actual = await TodoToggle.controller(req)
     const excepted = { statusCode: 404, message: 'todo not found' }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 })

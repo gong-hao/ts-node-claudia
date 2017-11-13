@@ -22,7 +22,7 @@ describe('test TodoModify.controller', () => {
     const excepted = {
       statusCode: 201
     }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 
   it('should return 404 if todo is not found', async () => {
@@ -32,6 +32,6 @@ describe('test TodoModify.controller', () => {
     updateOneByIdStub = sinon.stub(CommonQueryService, 'updateOneById').returns({ modifiedCount: 0 })
     const actual = await TodoModify.controller(req)
     const excepted = { statusCode: 404, message: 'todo not found' }
-    expect(actual).is.deep.equal(excepted)
+    expect(actual).deep.equals(excepted)
   })
 })

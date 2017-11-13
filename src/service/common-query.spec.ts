@@ -23,7 +23,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.insertOne({}, 'collectionName')
-    expect(actual.insertedCount).is.deep.equals(1)
+    expect(actual.insertedCount).deep.equals(1)
   })
 
   it('should insertMany', async () => {
@@ -34,7 +34,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.insertMany([{}, {}], 'collectionName')
-    expect(actual.insertedCount).is.deep.equals(2)
+    expect(actual.insertedCount).deep.equals(2)
   })
 
   it('should updateOneById', async () => {
@@ -45,7 +45,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.updateOneById(new ObjectID(), {}, 'collectionName')
-    expect(actual.modifiedCount).is.deep.equals(1)
+    expect(actual.modifiedCount).deep.equals(1)
   })
 
   it('should updateOneByQuery', async () => {
@@ -56,7 +56,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.updateOneByQuery({}, {}, 'collectionName')
-    expect(actual.modifiedCount).is.deep.equals(1)
+    expect(actual.modifiedCount).deep.equals(1)
   })
 
   it('should updateManyByIds', async () => {
@@ -67,7 +67,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.updateManyByIds([new ObjectID(), new ObjectID()], {}, 'collectionName')
-    expect(actual.modifiedCount).is.deep.equals(2)
+    expect(actual.modifiedCount).deep.equals(2)
   })
 
   it('should updateManyByQuery', async () => {
@@ -78,7 +78,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.updateManyByQuery({}, {}, 'collectionName')
-    expect(actual.modifiedCount).is.deep.equals(2)
+    expect(actual.modifiedCount).deep.equals(2)
   })
 
   it('should deleteOneById', async () => {
@@ -89,7 +89,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.deleteOneById(new ObjectID(), 'collectionName')
-    expect(actual.deletedCount).is.deep.equals(1)
+    expect(actual.deletedCount).deep.equals(1)
   })
 
   it('should deleteOneByQuery', async () => {
@@ -100,7 +100,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.deleteOneByQuery({}, 'collectionName')
-    expect(actual.deletedCount).is.deep.equals(1)
+    expect(actual.deletedCount).deep.equals(1)
   })
 
   it('should deleteManyByIds', async () => {
@@ -111,7 +111,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.deleteManyByIds([new ObjectID(), new ObjectID()], 'collectionName')
-    expect(actual.deletedCount).is.deep.equals(2)
+    expect(actual.deletedCount).deep.equals(2)
   })
 
   it('should deleteManyByQuery', async () => {
@@ -122,7 +122,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.deleteManyByQuery({}, 'collectionName')
-    expect(actual.deletedCount).is.deep.equals(2)
+    expect(actual.deletedCount).deep.equals(2)
   })
 
   it('should findOneById', async () => {
@@ -134,7 +134,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.findOneById(new ObjectID(), 'collectionName')
-    expect(actual).is.deep.equals(data)
+    expect(actual).deep.equals(data)
   })
 
   it('should findOneByQuery', async () => {
@@ -146,7 +146,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.findOneByQuery({}, 'collectionName')
-    expect(actual).is.deep.equals(data)
+    expect(actual).deep.equals(data)
   })
 
   it('should findManyByIds', async () => {
@@ -160,7 +160,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.findManyByIds([new ObjectID(), new ObjectID()], 'collectionName')
-    expect(actual).is.deep.equals(data)
+    expect(actual).deep.equals(data)
   })
 
   it('should findManyByQuery', async () => {
@@ -174,7 +174,7 @@ describe('test DbClient.getDb', () => {
     }
     mongoClientStub = sinon.stub(MongoClient, 'connect').resolves(db)
     const actual = await CommonQueryService.findManyByQuery({}, 'collectionName')
-    expect(actual).is.deep.equals(data)
+    expect(actual).deep.equals(data)
   })
 
   it('should findWithPaging', async () => {
@@ -225,7 +225,7 @@ describe('test DbClient.getDb', () => {
           }
       }
     }
-    expect(actual).is.deep.equals(excepted)
+    expect(actual).deep.equals(excepted)
   })
 
   it('should findWithPaging set defaultSortObj', async () => {
@@ -279,6 +279,6 @@ describe('test DbClient.getDb', () => {
           }
       }
     }
-    expect(actual).is.deep.equals(excepted)
+    expect(actual).deep.equals(excepted)
   })
 })

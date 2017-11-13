@@ -14,7 +14,7 @@ describe('test PagingHelper._getSortObject', () => {
       CreateOn: -1,
       Title: 1
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 
   it('should return an sort object when using "Views, -CreateOn, +Title"', () => {
@@ -26,7 +26,7 @@ describe('test PagingHelper._getSortObject', () => {
       CreateOn: -1,
       Title: 1
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 
   it('should return an sort object when using ", Views, -CreateOn, +Title"', () => {
@@ -38,7 +38,7 @@ describe('test PagingHelper._getSortObject', () => {
       CreateOn: -1,
       Title: 1
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 
   it('should return an default sort object when not passing sort param', () => {
@@ -48,19 +48,19 @@ describe('test PagingHelper._getSortObject', () => {
     const expected = {
       CreateOn: -1
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 })
 
 describe('test PagingHelper._getPageUrl', () => {
   it('should change the url to "Page=1" if it is the first page', () => {
     const actual = PagingHelper._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 1)
-    expect(actual).equal('/todo?Page=1&Limit=2&Sort=Title,-CreateOn')
+    expect(actual).equals('/todo?Page=1&Limit=2&Sort=Title,-CreateOn')
   })
 
   it('should change the url to "Page=2" if it is the previous page', () => {
     const actual = PagingHelper._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 2)
-    expect(actual).equal('/todo?Page=2&Limit=2&Sort=Title,-CreateOn')
+    expect(actual).equals('/todo?Page=2&Limit=2&Sort=Title,-CreateOn')
   })
 
   it('should change the url to null if it is the current page', () => {
@@ -70,17 +70,17 @@ describe('test PagingHelper._getPageUrl', () => {
 
   it('should change the url to "Page=4" if it is the next page', () => {
     const actual = PagingHelper._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 4)
-    expect(actual).equal('/todo?Page=4&Limit=2&Sort=Title,-CreateOn')
+    expect(actual).equals('/todo?Page=4&Limit=2&Sort=Title,-CreateOn')
   })
 
   it('should change the url to "Page=5" if it is the last page', () => {
     const actual = PagingHelper._getPageUrl('/todo?Page=3&Limit=2&Sort=Title,-CreateOn', 3, 5)
-    expect(actual).equal('/todo?Page=5&Limit=2&Sort=Title,-CreateOn')
+    expect(actual).equals('/todo?Page=5&Limit=2&Sort=Title,-CreateOn')
   })
 
   it('should skip extra ? or &', () => {
     const actual = PagingHelper._getPageUrl('/todo???Page=3&&&Limit=2&Sort=Title,-CreateOn', 3, 2)
-    expect(actual).equal('/todo?Page=2&Limit=2&Sort=Title,-CreateOn')
+    expect(actual).equals('/todo?Page=2&Limit=2&Sort=Title,-CreateOn')
   })
 })
 
@@ -115,7 +115,7 @@ describe('test PagingHelper._getMetadata', () => {
         last: "/todo?Page=7&Limit=2&Sort=Title,-CreateOn"
       }
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 
   it('should return correct metadata if the page count is divisible', () => {
@@ -148,7 +148,7 @@ describe('test PagingHelper._getMetadata', () => {
         last: "/todo?Page=5&Limit=2&Sort=Title,-CreateOn"
       }
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 
   it('should return correct metadata if it is the last page', () => {
@@ -181,7 +181,7 @@ describe('test PagingHelper._getMetadata', () => {
         last: null
       }
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 
   it('should return page not exist metadata if page less than 1', () => {
@@ -208,7 +208,7 @@ describe('test PagingHelper._getMetadata', () => {
       },
       links: null
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 
   it('should return page not exist metadata if page greater than last', () => {
@@ -235,7 +235,7 @@ describe('test PagingHelper._getMetadata', () => {
       },
       links: null
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 })
 
@@ -269,6 +269,6 @@ describe('test PagingHelper.getPagingHelper', () => {
         last: "/todo?Page=7&Limit=2&Sort=Title,-CreateOn"
       }
     }
-    expect(actual).is.deep.equal(expected)
+    expect(actual).deep.equals(expected)
   })
 })
