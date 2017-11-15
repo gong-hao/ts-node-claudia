@@ -9,7 +9,6 @@ import { CommonQueryService } from '../../service/common-query.service'
 import { BaseSchema } from '../../validation/base-schema'
 import { Validator } from '../../validation/validator'
 
-
 const controller = async (req: express.Request): Promise<Result<any>> => {
   const params = await Validator.validate<IdParams>(req.params, BaseSchema.id())
   const body = await Validator.validate<Todo>(req.body, TodoSchema.modify())
