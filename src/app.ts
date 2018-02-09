@@ -16,8 +16,8 @@ export default (action?): any => {
     extended: false
   }))
 
-  app.use('/', todoRouter)
-  app.use('/', notFoundRouter)
+  app.use(todoRouter)
+  app.use(notFoundRouter)
 
   return app
 }
