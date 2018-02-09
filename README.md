@@ -44,7 +44,7 @@ aws_secret_access_key = YOUR_ACCESS_SECRET
 
 > The AWS credentials file – located at ~/.aws/credentials on Linux, macOS, or Unix, or at C:\Users\USERNAME \.aws\credentials on Windows. This file can contain multiple named profiles in addition to a default profile.
 
-> See more detail in [INSTALLING AND CONFIGURING CLAUDIA.JS](https://claudiajs.com/tutorials/installing.html#configuring-access-credentials)
+> See more detail in [INSTALLING AND CONFIGURING CLAUDIA.JS](https://claudiajs.com/tutorials/installing.html#configuring-access-credentials).
 
 ## Deploy stepts
 
@@ -52,11 +52,17 @@ aws_secret_access_key = YOUR_ACCESS_SECRET
 
    > If you are using Windows OS, please run `npm run build-win` instead.
 
-2. Run `npm run create` to initialize [`Claudia.js`](https://github.com/claudiajs/claudia). [`Claudia.js`](https://github.com/claudiajs/claudia) will install packages, zip files, upload to [`Lambda`](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html), setup [`API Gateway`](http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html).
+2. Run `npm run create` to initialize [`Claudia.js`](https://github.com/claudiajs/claudia). [`Claudia.js`](https://github.com/claudiajs/claudia) will install packages, zip files, upload to [`Lambda`](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html), and setup [`API Gateway`](http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html).
+
+   > :warning: The `--region` option is mandatory for the create command, and the `package.json` uses `us-east-1` for the default. If you want to deploy to the different region, please change it before you run the script.
+
+   > Here are the [AWS Available Regions](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions).
+
+   > See more detail in [Claudia.js create command](https://github.com/claudiajs/claudia/blob/master/docs/create.md).
 
 3. Run `npm run update` to update api if you have done `npm run create` before. Be careful to keep claudia.json into `dist folder`. Claudia will generate it after creating api, and use it to update api.
 
-   > See more detail in [Claudia.js documentation](https://github.com/claudiajs/claudia/tree/master/docs)
+   > See more detail in [Claudia.js update command](https://github.com/claudiajs/claudia/blob/master/docs/update.md).
 
 ## Testing
 
